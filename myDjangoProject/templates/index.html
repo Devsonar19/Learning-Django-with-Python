@@ -84,7 +84,12 @@
               </div>
 
               <h1 class="display-heading mb-3">
-                Crafting calm digital experiences with thoughtful details
+                {% if user.is_authenticated %}
+                Welcome {{user.username}}, Have a Nice Day!
+                {% else %}
+                Welcome Guest User, You Can also have a nice day
+                {% endif %}
+
               </h1>
 
               <p class="lead mb-4">
@@ -92,10 +97,18 @@
               </p>
 
               <div class="cta-group d-flex flex-wrap align-items-center gap-3" data-aos="zoom-in" data-aos-delay="250">
-                <a href="#portfolio" class="btn btn-ghost">
-                  View Selected Work
-                  <i class="bi bi-arrow-right ms-2"></i>
-                </a>
+                              {% if user.is_authenticated %}
+                      <a href="{% url 'logout' %}" class="btn btn-ghost">
+                          Logout HERE Dear User
+                          <i class="bi bi-arrow-right ms-2"></i>
+                      </a>
+                  {% else %}
+                      <a href="{% url 'login' %}" class="btn btn-ghost">
+                          Guest Logout, Nahhh
+                          <i class="bi bi-arrow-right ms-2"></i>
+                      </a>
+                  {% endif %}
+
                 <a href="#contact" class="link-underline">
                   Get in touch
                   <i class="bi bi-envelope ms-2"></i>

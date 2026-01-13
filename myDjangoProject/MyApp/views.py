@@ -24,7 +24,7 @@ def register(request):
     if request.method == 'POST': 
         username = request.POST['username']
         email = request.POST['email']
-        password = request.POST['password']
+        password = request.POST['password'] 
         passwordRep = request.POST['passwordRep']
 
         if password == passwordRep:
@@ -44,3 +44,6 @@ def register(request):
         
     else:
         return render(request, 'register.html')
+    
+def login_view(request):
+    return render(request, 'login.html')

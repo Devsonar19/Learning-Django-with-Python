@@ -15,9 +15,8 @@ def index(request):
     return render(request, 'index.html' ,{'feature': feature})
 
 def countWord(request):
-    words = request.POST['words']
-    count_of_words = len(words.split())
-    return render(request, 'countWord.html', {'amount' : count_of_words})
+    posts = [1,2,3,4,5, 'tim','sim','pim']
+    return render(request, 'countWord.html', {'amount' : posts})
 
 
 def register(request):
@@ -46,4 +45,25 @@ def register(request):
         return render(request, 'register.html')
     
 def login_view(request):
-    return render(request, 'login.html')
+    if request.method == 'POST':
+        username =request.POST['username']
+        password =request.POST['password']
+
+        user = auth.authenticate(username=username, password=password)
+
+        if user is not None:
+            auth.login(request, user)
+            return redirect('/')
+        else:
+            messages.info(request, 'Invalid Credentials')
+            return redirect('login')
+        
+    else: 
+        return render(request, 'login.html')
+
+def logout_view(request):
+    auth.logout(request)
+    return redirect('/')
+
+def post(request, pk):
+    return render(request, 'post.html', {'pk':pk})

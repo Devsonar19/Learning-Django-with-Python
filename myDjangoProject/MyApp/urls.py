@@ -6,4 +6,6 @@ urlpatterns = [
     path('countWord', views.countWord, name='countWord'),
     path('register', views.register, name='register'),
     path('login', views.login_view, name='login'),
+    # path('logout', views.logout_view, name='logout'),
+    path('post/<str:pk>', views.post, name='post'),
 ]
